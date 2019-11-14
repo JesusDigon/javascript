@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script src="calculadora.js"></script>
+        <title>Calculadora</title>
+        <style>
+        form{
+            background-color: darkcyan;
+            width: 50vw;
+        }
+        button{
+            width:10vw;
+            padding: 2vw;
+            margin:1vw;
+        }
+        input{
+            width: 10vw;
+            padding: 2vw;
+            margin: 1vw;
+        }
+        input[type='text']{
+            width: 34vw;
+            padding: 2vw;
+            margin:2vw;
+        }
+
+        </style>
+    </head>
+    <body>
+        <h1>Calculadora</h1>
+        <form name="form">
+        <input type="submit" value="Reset"><input type="text" maxlength="10" name="pantalla" value="0"><br>
+        <button onclick=" return ponernumero(7)">7</button>
+        <button onclick=" return ponernumero(8)">8</button>
+        <button onclick=" return ponernumero(9)">9</button>
+        <button onclick=" return obtenerOperador('+')">+</button><br>
+        <button onclick=" return ponernumero(4)">4</button>
+        <button onclick=" return ponernumero(5)">5</button>
+        <button onclick=" return ponernumero(6)">6</button>
+        <button onclick=" return obtenerOperador('-')">-</button><br>
+        <button onclick=" return ponernumero(1)">1</button>
+        <button onclick=" return ponernumero(2)">2</button>
+        <button onclick=" return ponernumero(3)">3</button>
+        <button onclick=" return obtenerOperador('*')">*</button><br>
+        <button onclick=" return ponernumero(0)">0</button>
+        <button onclick=" return ponernumero('.')">.</button>
+        <button onclick=" return Resolver()">=</button>
+        <button onclick=" return obtenerOperador('/')">/</button>
+    </form>
+    </body>
+</html>
