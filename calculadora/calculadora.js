@@ -3,7 +3,7 @@ var num2=0;
 var operador="";
 var resul=0;
 function ponernumero(num){
-    if(document.form.pantalla.value==0){
+    if(document.form.pantalla.value==0||resul!=0){
         document.form.pantalla.value=num;
     }else{
         document.form.pantalla.value+=num;
@@ -25,5 +25,6 @@ function Resolver(){
         case "/": resul=parseFloat(num1)/parseFloat(num2); break;
     }
     document.form.pantalla.value=resul;
+    num1=0;
     return false;
 }
