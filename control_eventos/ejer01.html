@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        var veces=0;
+    function mostrarInfo(evento){
+        veces++;
+        var caja=document.getElementById("cajaTexto");
+        caja.value=veces;
+    }
+    function asignarEvento(evento){
+        if(document.readyState == 'complete'){
+            console.log("documento cargado al 100%");
+            document.getElementById('boton1').addEventListener('click', mostrarInfo, false);
+        }
+    }
+    document.addEventListener('readystatechange',asignarEvento,false);
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" id="cajaTexto" value="rojo"><br>
+        <button type="submit" id="boton1" onclick="return false" >Púlsalo</button>
+    </form>
+</body>
+</html>
