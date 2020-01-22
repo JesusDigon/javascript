@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        
+        
+        function cambio(){
+            var campo1=document.getElementById("Nombre");
+            campo1.addEventListener('keypress', mostrar);
+            var campo2=document.getElementById("Apellidos");
+            campo2.addEventListener('keypress', Transmision);
+        }
+        function mostrar(evento){
+            var campo2=document.getElementById("Apellidos");
+            if(evento.keyCode=="13"){
+                campo2.focus();
+            }
+        }
+        function Transmision(evento){
+            if(evento.keyCode=="13"){
+                alert("Iniciando transmisión");
+            }
+        }
+    
+        document.addEventListener('readystatechange', cambio, false);
+    </script>
+</head>
+<body>
+    <form>
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="Nombre"><br>        
+        <label for="apellidos">Apellidos: </label>
+        <input type="text" id="Apellidos"><br>  
+        <p>MESNAJES SERVIDOR</p>  
+    </form>
+
+</body>
+</html>
