@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Local Storage</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        function almacenar(evento){
+            var identificador=evento.target.name;
+            sessionStorage.visita=identificador;
+        }
+        function configurar(){
+            var opciones=document.getElementsByClassName("Turismo");
+            for (let i in opciones){
+                opciones[i].addEventListener("click", almacenar, false);
+            }
+            
+        }
+    </script>
+</head>
+<body onload="configurar()";>
+    <p>OBJETO DOCUMENTO</p>
+    <p>
+        Opción 1 <a href="Index2.html" class="Turismo" id="1" name="Austrias">Visita de la ruta de los Austrias</a><br><br>
+
+    </p>
+    <p>
+        Opción 2 <a href="Index2.html" class="Turismo" id="2" name="Moderno">Visita de la ruta de los Austrias</a><br><br>
+
+    </p>
+    <p>
+        Opción 2 <a href="Index2.html" class="Turismo" id="3" name="Pepito">Visita de la ruta de los Austrias</a><br><br>
+
+    </p>
+    
+</body>
+</html>

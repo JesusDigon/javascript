@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        function recuperar(){
+            if(sessionStorage.visita){
+                var ruta= sessionStorage.visita;
+                document.getElementById("info").value=ruta;
+                document.getElementById("imagen").src=ruta+".png";
+            }
+        }
+    </script>
+</head>
+<body onload="recuperar()">
+    <p>Ficha resumen de las opciones elegidas</p>
+    <img src="" id="imagen"><br><br>
+    Ruta elegida: <input type="text" id="info" value="">
+    
+</body>
+</html>
