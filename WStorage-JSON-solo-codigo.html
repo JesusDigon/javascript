@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Uso Web Storage con JSON</title>
+	
+	
+</head>
+<body>
+	<form>
+		<div>
+			<label>Nombre:</label>
+			<div><input type="text" /></div>
+		</div>
+		<div>
+			<label>Apellidos:</label>
+			<div><input type="text" /></div>
+		</div>
+		<div>
+			<label>Email:</label>
+			<div><input type="text" /></div><br>
+			
+		</div><br>
+		<div>
+			<div>
+				<div><input type="button" value="Grabar" /></div><br>
+			</div>
+			<div>
+				<div><input type="button" value="Recuperar" /><br/>
+				<input type="button" value="Limpiar" /></div>
+			</div>
+		</div>
+		
+	</form>
+	
+<script>
+document.addEventListener('readystatechange', inicializar, false );
+var cont=0;
+function inicializar(){
+	var botonGrabar=document.getElementsByTagName("input")[3];
+	var botonRecuperar=document.getElementsByTagName("input")[4];
+	var botonLimpiar=document.getElementsByTagName("input")[5];
+	botonGrabar.addEventListener('click', accion, false);
+	botonRecuperar.addEventListener('click', accion, false);
+	botonLimpiar.addEventListener('click', accion, false);
+}
+function accion(evento){
+	var nombre=document.getElementsByTagName("input")[0].value;
+	var apellido=document.getElementsByTagName("input")[1].value;
+	var mail=document.getElementsByTagName("input")[2].value;
+	var contactos= { "Nombre": nombre, "Apellidos": apellido, "mail": mail};
+	
+	switch(evento.target.value){
+		case 'Grabar':
+		alert("Grabando");
+		AlmacenContactos.push(contactos);
+		localStorage.setItem('contacto'+cont, JSON.stringify(AlmacenContactos));
+		document.getElementsByTagName("form")[0].reset();
+		cont++;break;
+		
+		case 'Recuperar':
+		alert("Recuperando");
+		var datos=JSON.parse(localStorage.getItem('contacto'));
+		for(i=0;i<datos.length;i++){
+			alert(datos[i].Nombre);
+		}
+		
+		document.getElementsByTagName("input")[0].value=datos[cont-1].Nombre;
+		document.getElementsByTagName("input")[1].value=datos[cont-1].Apellidos;
+		document.getElementsByTagName("input")[2].value=datos[cont-1].mail;
+		
+		alert(cont);break;
+		
+		case 'Limpiar':
+		alert("limpiando");
+		localStorage.clear;
+		cont=0;break;
+
+	}
+}
+</script>
+</body>
+</html>
