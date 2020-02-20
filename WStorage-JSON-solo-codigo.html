@@ -35,7 +35,14 @@
 	
 <script>
 document.addEventListener('readystatechange', inicializar, false );
-var cont=0;
+
+if(localStorage.length<=0){
+	var cont=0;
+}else{
+	var cont=localStorage.length;
+}
+
+
 function inicializar(){
 	var botonGrabar=document.getElementsByTagName("input")[3];
 	var botonRecuperar=document.getElementsByTagName("input")[4];
@@ -48,32 +55,29 @@ function accion(evento){
 	var nombre=document.getElementsByTagName("input")[0].value;
 	var apellido=document.getElementsByTagName("input")[1].value;
 	var mail=document.getElementsByTagName("input")[2].value;
-	var contactos= { "Nombre": nombre, "Apellidos": apellido, "mail": mail};
+	var contacto= { "Nombre": nombre, "Apellidos": apellido, "mail": mail};
 	
 	switch(evento.target.value){
 		case 'Grabar':
 		alert("Grabando");
-		AlmacenContactos.push(contactos);
-		localStorage.setItem('contacto'+cont, JSON.stringify(AlmacenContactos));
+		localStorage.setItem("contacto"+cont.toString(), JSON.stringify(contacto));
 		document.getElementsByTagName("form")[0].reset();
-		cont++;break;
+		cont++;alert(cont);break;
 		
 		case 'Recuperar':
 		alert("Recuperando");
-		var datos=JSON.parse(localStorage.getItem('contacto'));
-		for(i=0;i<datos.length;i++){
-			alert(datos[i].Nombre);
-		}
+		alert(cont);
+		alert(localStorage.getItem("contacto"+cont.toString()));
+		var datos=JSON.parse(localStorage.getItem("contacto"+(cont-1).toString()));
+		document.getElementsByTagName("input")[0].value=datos.Nombre;
+		document.getElementsByTagName("input")[1].value=datos.Apellidos;
+		document.getElementsByTagName("input")[2].value=datos.mail;
 		
-		document.getElementsByTagName("input")[0].value=datos[cont-1].Nombre;
-		document.getElementsByTagName("input")[1].value=datos[cont-1].Apellidos;
-		document.getElementsByTagName("input")[2].value=datos[cont-1].mail;
-		
-		alert(cont);break;
+		break;
 		
 		case 'Limpiar':
 		alert("limpiando");
-		localStorage.clear;
+		localStorage.clear();
 		cont=0;break;
 
 	}
