@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -7,82 +8,85 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script>
-    var xhr;
-    var comunidad;
-    var provincia;
-    var objetoPeticion=new Object();
-    var objetoRespuesta=new Object();
-    function enviarPeticionAJAX(evento){
-        if(comunidad.value!=''){
-            datos= new FormData(document.forms[0]);
-            objetoPeticion.comunidad=comunidad.value;
-            comunidad.disabled=true;
-            xhr= new XMLHttpRequest();
-            xhr.addEventListener('readystatechange', gestionarRespuesta, false );
-            xhr.open('POST', 'provincias.json', true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(datos);
+        var xhr;
+        var comunidad;
+        var provincia;
+        var objetoPeticion = new Object();
+        var objetoRespuesta = new Object();
+        function enviarPeticionAJAX(evento) {
+            if (comunidad.value != '') {
+                //datos= new FormData(document.forms[0]);
+                objetoPeticion.comunidad = comunidad.value;
+                comunidad.disabled = true;
+                xhr = new XMLHttpRequest();
+                xhr.addEventListener('readystatechange', gestionarRespuesta, false);
+                xhr.open('POST', 'provincias.php', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("comunidad=" + objetoPeticion.comunidad);
+            }
         }
-    }
-    function gestionarRespuesta(evento){
-        if(evento.target.readyState==4 && evento.target.status==200){
-            comunidad.disabled=false;
-            objetoRespuesta= JSON.parse(evento.target.responseText);
-            recorrerJson(objetoRespuesta);
-            
-        }}
-    function inicializar(){
-        if(document.readyState=='complete'){
-            comunidad=document.getElementById("uno");
-            provincia=document.getElementById("dos");
-            comunidad.addEventListener('change', enviarPeticionAJAX, false);
+        function gestionarRespuesta(evento) {
+            if (evento.target.readyState == 4 && evento.target.status == 200) {
+                comunidad.disabled = false;
+                objetoRespuesta = evento.target.responseText;
+                //recorrerJson(objetoRespuesta);
+                provincia.innerHTML = objetoRespuesta;
+            }
         }
-    }
-    function recorrerJson(documento){
-        for ( let i in documento){
-            if(i==comunidad.value){
-                provincia.innerHTML="<option>--Escoja una provincia--</option>";
-                for (let j in documento[i]){
-                    provincia.innerHTML+="<option>"+documento[i][j]+"</option>"; 
+        function inicializar() {
+            if (document.readyState == 'complete') {
+                comunidad = document.getElementById("uno");
+                provincia = document.getElementById("dos");
+                comunidad.addEventListener('change', enviarPeticionAJAX, false);
+            }
+        }
+        function recorrerJson(documento) {
+            for (let i in documento) {
+                if (i == comunidad.value) {
+                    provincia.innerHTML = "<option>--Escoja una provincia--</option>";
+                    for (let j in documento[i]) {
+                        provincia.innerHTML += "<option>" + documento[i][j] + "</option>";
+                    }
                 }
             }
         }
-    }
-    document.addEventListener('readystatechange', inicializar, false);
+        document.addEventListener('readystatechange', inicializar, false);
     </script>
 </head>
+
 <body>
-<form>
-    <table>
-        <tr>
-            <td>Comunidades</td>
-            <td>
-                <select id="uno">
-                    <option>--Elija una opcion--</option>
-                    <option>andalucia</option>
-                    <option>aragon</option>
-                    <option>asturias</option>
-                    <option>baleares</option>
-                    <option>canarias</option>
-                    <option>cantabria</option>
-                    <option>castilla la mancha</option>
-                    <option>castilla y leon</option>
-                    <option>cataluña</option>
-                    <option>comunidad valenciana</option>
-                    <option>extremadura</option>
-                    <option>galicia</option>
-                    <option>la rioja</option>
-                    <option>madrid</option>
-                    <option>navarra</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <select id="dos"></select>
-            </td>
-        </tr>
-    </table>
-</form>
+    <form action="provincias.php">
+        <table>
+            <tr>
+                <td>Comunidades</td>
+                <td>
+                    <select id="uno" name="uno">
+                        <option>--Elija una opcion--</option>
+                        <option>andalucia</option>
+                        <option>aragon</option>
+                        <option>asturias</option>
+                        <option>baleares</option>
+                        <option>canarias</option>
+                        <option>cantabria</option>
+                        <option>castilla la mancha</option>
+                        <option>castilla y leon</option>
+                        <option>cataluña</option>
+                        <option>comunidad valenciana</option>
+                        <option>extremadura</option>
+                        <option>galicia</option>
+                        <option>la rioja</option>
+                        <option>madrid</option>
+                        <option>navarra</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="dos"></select>
+                </td>
+            </tr>
+        </table>
+    </form>
 </body>
+
 </html>
