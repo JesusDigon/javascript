@@ -16,13 +16,24 @@
         var login=document.getElementById("login").value;
         xhr.addEventListener("readystatechange", gestionarRespuesta, true);
         xhr.open("POST", "compruebaDisponibilidadXML.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("login="+login);
         alert(login);
     }
     function gestionarRespuesta(evento){
         if(evento.target.status==200 && evento.target.readyState==4){
         respuesta=evento.target.responseXML;
-        alert(respuesta.getElementsByTagName("respuesta")[0].getAttribute("disponible"));}
+        if(respuesta.getElementsByTagName("respuesta")[0].getElementsByTagName("disponible")[0].firstChild.nodeValue=="si"){
+            document.getElementById("disponibilidad").innerHTML="<p>Nombre disponible</p>";
+        }else{
+            document.getElementById("disponibilidad").innerHTML="<p>Nombre no disponible, alternativas posibles: </p>";
+            var alternativas=respuesta.getElementsByTagName("respuesta")[0].getElementsByTagName("alternativas");
+            
+            for (i=0;i<alternativas[0].getElementsByTagName("login").length;i++){
+                document.getElementById("disponibilidad").innerHTML+= alternativas[0].getElementsByTagName("login")[i].firstChild.nodeValue+"<br>";
+            }
+        }
+    }
         //if(respuesta.getElementsByTagName("respuesta")[0]=="si"){
             //document.getElementById("disponibilidad").innerHTML="<h1>Nombre de usuario disponible";
         //}

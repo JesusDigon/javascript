@@ -20,7 +20,7 @@ if($disponible == "si") {
 	echo json_encode(array("disponible" => "si"));
 }
 else {
-	echo json_encode(array("disponible" => no, "alternativas" => $alternativasAutomaticas));
+	echo json_encode(array("disponible" => "no", "alternativas" => $alternativasAutomaticas));
 }
 
 ?>

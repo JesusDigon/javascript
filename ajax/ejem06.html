@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        document.addEventListener("readystatechange", iniciar, true);
+        function iniciar(){
+            if(document.readyState=="complete"){
+                peticionProvincias();
+                document.getElementById("provincias").addEventListener("change", enviarPeticionMunicipios, true);
+            }
+        }
+        function peticionProvincias(evento){
+            var xhr=new XMLHttpRequest();
+            var respuesta=new FormData(document.forms[0]);
+            xhr.addEventListener("readystatechange", gestionarRespuesta, true);
+            xhr.open("POST", "cargaProvinciasXML.php");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(null);
+        }
+        function gestionarRespuesta(evento){
+            if(evento.target.status==200 && evento.target.readyState==4){
+            var respuesta=evento.target.responseXML;
+            var provincias= respuesta.getElementsByTagName("provincia");
+            alert(provincias[0].getElementsByTagName("nombre")[0].firstChild.nodeValue);
+            for(i=0;i<provincias.length;i++){
+                document.getElementById("provincias").innerHTML+="<option>"+provincias[i].getElementsByTagName("nombre")[0].firstChild.nodeValue+"</option>";
+            }
+        }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <select id="provincias" name="provincias"></select>
+    </form>
+</body>
+</html>

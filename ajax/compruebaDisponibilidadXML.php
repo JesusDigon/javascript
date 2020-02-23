@@ -1,6 +1,6 @@
 <?php
 // Obtener el valor del login que se quiere comprobar
-$login = "amparo";
+$login = $_POST['login'];
 
 // Generar un n�mero aleatorio
 srand((double)microtime()*1000000);

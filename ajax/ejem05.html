@@ -14,13 +14,22 @@
         var xhr=new XMLHttpRequest();
         xhr.addEventListener("readystatechange", gestionarRespuesta, true);
         xhr.open("POST", "compruebaDisponibilidadJSON.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("login="+document.getElementById("login").value);
-        //xhr.setRequestHeader("Content-Type", "application/json");
+       
     }
     function gestionarRespuesta(evento){
+        var divDisponibilidad=document.getElementById("disponibilidad");
         if(evento.target.status==200 && evento.target.readyState==4){
             objetoRespuesta= JSON.parse(evento.target.responseText);
-            alert(objetoRespuesta);
+            if(objetoRespuesta.disponible=="si"){
+                divDisponibilidad.innerHTML="<p>El nombre está disponible</p>";
+            }else{
+                divDisponibilidad.innerHTML="<p>El nombre no esta disponible, alternativas:</p> ";
+                for (i=0;i<objetoRespuesta.alternativas.length;i++){
+                    divDisponibilidad.innerHTML+=objetoRespuesta.alternativas[i]+"<br>";
+                }
+            }
         }       
     }
     
