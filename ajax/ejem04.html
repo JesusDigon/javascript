@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    
     <title>Ejercicio 3 - Comprobar disponibilidad del login</title>
 
     <script type="text/javascript">
@@ -16,10 +16,11 @@
         xhr.addEventListener("readystatechange", gestionarRespuesta, true);
         xhr.open("POST", "compruebaDisponibilidadXML.php", true);
         xhr.send("login="+document.getElementById("login").value);
+        alert(document.getElementById("login").value);
     }
     function gestionarRespuesta(evento){
-        respuesta=evento.target.responseXML;
-        alert(respuesta.getElementsByTagName("respuesta"));
+        respuesta=evento.target.responseText;
+        alert(respuesta);
         //if(respuesta.getElementsByTagName("respuesta")[0]=="si"){
             //document.getElementById("disponibilidad").innerHTML="<h1>Nombre de usuario disponible";
         //}
