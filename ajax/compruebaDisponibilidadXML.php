@@ -1,6 +1,6 @@
 <?php
 // Obtener el valor del login que se quiere comprobar
-$login = $_POST["login"];
+$login = "amparo";
 
 // Generar un n�mero aleatorio
 srand((double)microtime()*1000000);
@@ -27,16 +27,16 @@ header('Content-Type: text/xml');
 
 // Generar contenidos XML de respuesta
 if($disponible == "si") {
-  echo "<respuesta>".
-       "<disponible>si</disponible>".
+  echo "<respuesta> \n".
+       "\t <disponible>si</disponible> \n".
        "</respuesta>";
 }
 else {
-  echo "<respuesta> ".
-       " <disponible>no</disponible> ".
-       " <alternativas> ".
-       "<login>".join("</login> <login>", $alternativasAutomaticas)."</login> ".
-       "</alternativas> ".
+  echo "<respuesta> \n".
+       "\t <disponible>no</disponible> \n".
+       "\t <alternativas> \n".
+       "\t\t <login>".join("</login> \n \t\t <login>", $alternativasAutomaticas)."</login> \n".
+       "\t </alternativas> \n".
        "</respuesta>";
 }
 ?>

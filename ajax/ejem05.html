@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>Ejercicio 3 - Comprobar disponibilidad del login</title>
 
     <script type="text/javascript">
@@ -10,23 +10,18 @@
         if(document.readyState=="complete"){
         document.getElementById("comprobar").addEventListener("click", enviarPeticion, true);}
     }
-    function enviarPeticion(evento){
+    function enviarPeticion(envento){
         var xhr=new XMLHttpRequest();
-       //var respuesta=new FormData(document.forms[0]);
-        var login=document.getElementById("login").value;
         xhr.addEventListener("readystatechange", gestionarRespuesta, true);
-        xhr.open("POST", "compruebaDisponibilidadXML.php", true);
-        xhr.send("login="+login);
-        alert(login);
+        xhr.open("POST", "compruebaDisponibilidadJSON.php", true);
+        xhr.send("login="+document.getElementById("login").value);
+        //xhr.setRequestHeader("Content-Type", "application/json");
     }
     function gestionarRespuesta(evento){
         if(evento.target.status==200 && evento.target.readyState==4){
-        respuesta=evento.target.responseXML;
-        alert(respuesta.getElementsByTagName("respuesta")[0].getAttribute("disponible"));}
-        //if(respuesta.getElementsByTagName("respuesta")[0]=="si"){
-            //document.getElementById("disponibilidad").innerHTML="<h1>Nombre de usuario disponible";
-        //}
-        
+            objetoRespuesta= JSON.parse(evento.target.responseText);
+            alert(objetoRespuesta);
+        }       
     }
     
     </script>
